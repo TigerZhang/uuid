@@ -225,7 +225,7 @@ get_v1(#uuid_state{node_id = NodeId,
                    timestamp_type = TimestampType}) ->
     {MegaSeconds, Seconds, MicroSeconds} = if
         TimestampType =:= erlang ->
-            erlang:now();
+            erlang:timestamp();
         TimestampType =:= os ->
             os:timestamp()
     end,
@@ -265,7 +265,7 @@ get_v1_time() ->
     non_neg_integer().
 
 get_v1_time(erlang) ->
-    {MegaSeconds, Seconds, MicroSeconds} = erlang:now(),
+    {MegaSeconds, Seconds, MicroSeconds} = erlang:timestamp(),
     (MegaSeconds * 1000000 + Seconds) * 1000000 + MicroSeconds;
 
 get_v1_time(os) ->
